@@ -1,7 +1,9 @@
 import 'package:equatable/equatable.dart';
+import 'package:json_annotation/json_annotation.dart';
 
 import 'meal.dart';
 
+@JsonSerializable()
 class Meals extends Equatable {
   const Meals(this.meals);
 
