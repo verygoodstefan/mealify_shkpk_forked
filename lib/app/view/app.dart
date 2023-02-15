@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:mealify_shkpk/counter/counter.dart';
+import 'package:mealify_shkpk/ideas/views/ideas.dart';
 import 'package:mealify_shkpk/l10n/l10n.dart';
 
 class App extends StatelessWidget {
@@ -16,7 +16,7 @@ class App extends StatelessWidget {
       ),
       localizationsDelegates: AppLocalizations.localizationsDelegates,
       supportedLocales: AppLocalizations.supportedLocales,
-      home: const CounterPage(),
+      home: const Ideas(),
     );
   }
 }
