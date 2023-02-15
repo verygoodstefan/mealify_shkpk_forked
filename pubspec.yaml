@@ -14,7 +14,9 @@ dependencies:
   flutter_bloc: ^8.1.2
   flutter_localizations:
     sdk: flutter
+  http: ^0.13.5
   intl: ^0.17.0
+  equatable: ^2.0.3
 
 dev_dependencies:
   bloc_test: ^9.1.1
