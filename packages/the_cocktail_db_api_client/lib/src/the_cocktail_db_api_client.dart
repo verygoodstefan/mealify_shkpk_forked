@@ -3,7 +3,8 @@
 import 'dart:convert';
 
 import 'package:http/http.dart' as http;
-import 'package:the_meal_db_api_client/src/models/drink.dart';
+
+import 'models/drink.dart';
 
 class TheCocktailDbApiClient {
   TheCocktailDbApiClient();
