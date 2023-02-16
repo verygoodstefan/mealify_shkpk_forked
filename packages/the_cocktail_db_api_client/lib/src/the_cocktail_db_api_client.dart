@@ -4,7 +4,7 @@ import 'dart:convert';
 
 import 'package:http/http.dart' as http;
 
-import 'models/drink.dart';
+import 'package:the_cocktail_db_api_client/src/models/drink.dart';
 
 class TheCocktailDbApiClient {
   TheCocktailDbApiClient();
