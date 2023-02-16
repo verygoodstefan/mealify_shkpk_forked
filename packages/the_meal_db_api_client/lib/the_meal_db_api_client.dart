@@ -1,19 +1,3 @@
-import 'dart:convert';
+library the_meal_db_api_client;
 
-import 'package:http/http.dart' as http;
-
-import 'lib/src/models/meal.dart';
-
-class TheMealDbApiClient {
-  TheMealDbApiClient();
-
-  Future<Meal> getRandomMeal() async {
-    final response =
-        await http.get(Uri.parse('www.themealdb.com/api/json/v1/1/random.php'));
-
-    if (response.statusCode == 200) {
-      return Meal.fromJson(jsonDecode(response.body) as Map<String, dynamic>);
-    }
-    throw Exception('Request failed');
-  }
-}
+export 'src/the_meal_db_api_client.dart';
