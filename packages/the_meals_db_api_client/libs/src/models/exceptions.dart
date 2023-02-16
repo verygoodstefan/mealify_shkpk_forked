@@ -1,0 +1,1 @@
+class CouldNotFetchDetails implements Exception {}
