@@ -6,7 +6,7 @@ import 'package:recipes_repository/src/models/pairing.dart';
 /// A Very Good Project created by Very Good CLI.
 /// {@endtemplate}
 class RecipesRepository {
-  final TheMealDbApiClient mealDbApiClient;
+  final TheMealsDbApiClient mealDbApiClient;
   final TheCocktailDbApiClient cocktailDbApiClient;
 
   /// {@macro recipes_repository}
@@ -15,21 +15,19 @@ class RecipesRepository {
     this.cocktailDbApiClient,
   );
 
-  Future<Pairing> getPairing({
+  /// Fetches a random meal/cocktail [Pairing] of a [Meal] and [Cocktail].
+  /// If a [Meal] is passed, that meal is paired with a [Cocktail] from the API.
+  /// If a [Cocktail] is passed, that cocktail is paired with a [Meal]
+  /// from the API.
+  /// If both [Meal] and [Cocktail] are passed, then they are paired together
+  /// and no call to the API is made.
+  Future<Pairing> getRandomPairing({
     Meal? meal,
     Cocktail? cocktail,
   }) async {
     try {
-      if (meal == null) {
-        final response = await mealDbApiClient.getRandomMeal();
-        meal = response.meals[0];
-      }
-
-      if (cocktail == null) {
-        final response = await cocktailDbApiClient.getRandomCocktail();
-        cocktail = response.cocktails[0];
-      }
-
+      meal ??= await mealDbApiClient.getRandomMeal();
+      cocktail ??= await cocktailDbApiClient.getRandomCocktail();
       return Pairing(meal: meal, cocktail: cocktail);
     } catch (_) {
       rethrow;
@@ -37,36 +35,16 @@ class RecipesRepository {
   }
 }
 
-class TheMealDbApiClient {
-  Future<Meals> getRandomMeal() async {
-    return Meals(meals: [Meal()]);
+class TheMealsDbApiClient {
+  Future<Meal> getRandomMeal() async {
+    return Meal();
   }
 }
 
 class TheCocktailDbApiClient {
-  Future<Cocktails> getRandomCocktail() async {
-    return Cocktails(cocktails: [Cocktail()]);
+  Future<Cocktail> getRandomCocktail() async {
+    return Cocktail();
   }
-}
-
-class Meals extends Equatable {
-  final List<Meal> meals;
-  const Meals({
-    required this.meals,
-  });
-
-  @override
-  List<Object?> get props => [meals];
-}
-
-class Cocktails extends Equatable {
-  final List<Cocktail> cocktails;
-  const Cocktails({
-    required this.cocktails,
-  });
-
-  @override
-  List<Object?> get props => [cocktails];
 }
 
 class Meal extends Equatable {

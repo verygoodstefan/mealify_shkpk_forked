@@ -4,24 +4,24 @@ import 'package:mocktail/mocktail.dart';
 import 'package:recipes_repository/recipes_repository.dart';
 import 'package:test/test.dart';
 
-class MockMealDbApiClient extends Mock implements TheMealDbApiClient {}
+class MockMealDbApiClient extends Mock implements TheMealsDbApiClient {}
 
 class MockCocktailDbApiClient extends Mock implements TheCocktailDbApiClient {}
 
 void main() {
   group('RecipesRepository', () {
-    late TheMealDbApiClient mealDbApiClient;
+    late TheMealsDbApiClient mealsDbApiClient;
     late TheCocktailDbApiClient cocktailDbApiClient;
     late RecipesRepository recipesRepository;
     setUp(() {
-      mealDbApiClient = MockMealDbApiClient();
+      mealsDbApiClient = MockMealDbApiClient();
       cocktailDbApiClient = MockCocktailDbApiClient();
       recipesRepository =
-          RecipesRepository(mealDbApiClient, cocktailDbApiClient);
-      when(() => mealDbApiClient.getRandomMeal())
-          .thenAnswer((_) => Future.value(Meals(meals: [Meal()])));
+          RecipesRepository(mealsDbApiClient, cocktailDbApiClient);
+      when(() => mealsDbApiClient.getRandomMeal())
+          .thenAnswer((_) => Future.value(Meal()));
       when(() => cocktailDbApiClient.getRandomCocktail())
-          .thenAnswer((_) => Future.value(Cocktails(cocktails: [Cocktail()])));
+          .thenAnswer((_) => Future.value(Cocktail()));
     });
 
     test('can be instantiated', () {
@@ -32,14 +32,15 @@ void main() {
     });
 
     test('fetches pairing with new meal and cocktail', () async {
-      final pairing = await recipesRepository.getPairing();
+      final pairing = await recipesRepository.getRandomPairing();
       expect(pairing.meal, equals(Meal()));
       expect(pairing.cocktail, equals(Cocktail()));
     });
 
     test('fetches new cocktail to pair with existing meal', () async {
       final currentMeal = Meal();
-      final pairing = await recipesRepository.getPairing(meal: currentMeal);
+      final pairing =
+          await recipesRepository.getRandomPairing(meal: currentMeal);
       expect(pairing.meal, equals(currentMeal));
       expect(pairing.cocktail, equals(Cocktail()));
     });
@@ -47,20 +48,20 @@ void main() {
     test('fetches new meal to pair with existing cocktail', () async {
       final currentCocktail = Cocktail();
       final pairing =
-          await recipesRepository.getPairing(cocktail: currentCocktail);
+          await recipesRepository.getRandomPairing(cocktail: currentCocktail);
       expect(pairing.meal, equals(Meal()));
       expect(pairing.cocktail, equals(currentCocktail));
     });
 
     test('throws exception when fetching meal fails', () async {
-      when(() => mealDbApiClient.getRandomMeal()).thenThrow(Exception());
-      expect(recipesRepository.getPairing(), throwsException);
+      when(() => mealsDbApiClient.getRandomMeal()).thenThrow(Exception());
+      expect(recipesRepository.getRandomPairing(), throwsException);
     });
 
     test('throws exception when fetching cocktail fails', () async {
       when(() => cocktailDbApiClient.getRandomCocktail())
           .thenThrow(Exception());
-      expect(recipesRepository.getPairing(), throwsException);
+      expect(recipesRepository.getRandomPairing(), throwsException);
     });
   });
 }
