@@ -16,13 +16,19 @@ class RecipesRepository {
   );
 
   Future<Pairing> getPairing({
-    Meal? currentMeal,
-    Cocktail? currentCocktail,
+    Meal? meal,
+    Cocktail? cocktail,
   }) async {
     try {
-      final meal = currentMeal ?? await mealDbApiClient.getRandomMeal();
-      final cocktail =
-          currentCocktail ?? await cocktailDbApiClient.getRandomCocktail();
+      if (meal == null) {
+        final response = await mealDbApiClient.getRandomMeal();
+        meal = response.meals[0];
+      }
+
+      if (cocktail == null) {
+        final response = await cocktailDbApiClient.getRandomCocktail();
+        cocktail = response.cocktails[0];
+      }
 
       return Pairing(meal: meal, cocktail: cocktail);
     } catch (_) {
@@ -32,15 +38,35 @@ class RecipesRepository {
 }
 
 class TheMealDbApiClient {
-  Future<Meal> getRandomMeal() async {
-    return Meal();
+  Future<Meals> getRandomMeal() async {
+    return Meals(meals: [Meal()]);
   }
 }
 
 class TheCocktailDbApiClient {
-  Future<Cocktail> getRandomCocktail() async {
-    return Cocktail();
+  Future<Cocktails> getRandomCocktail() async {
+    return Cocktails(cocktails: [Cocktail()]);
   }
+}
+
+class Meals extends Equatable {
+  final List<Meal> meals;
+  const Meals({
+    required this.meals,
+  });
+
+  @override
+  List<Object?> get props => [meals];
+}
+
+class Cocktails extends Equatable {
+  final List<Cocktail> cocktails;
+  const Cocktails({
+    required this.cocktails,
+  });
+
+  @override
+  List<Object?> get props => [cocktails];
 }
 
 class Meal extends Equatable {

@@ -20,9 +20,9 @@ void main() {
       recipesRepository =
           RecipesRepository(mealDbApiClient, cocktailDbApiClient);
       when(() => mealDbApiClient.getRandomMeal())
-          .thenAnswer((_) => Future.value(Meal()));
+          .thenAnswer((_) => Future.value(Meals(meals: [Meal()])));
       when(() => cocktailDbApiClient.getRandomCocktail())
-          .thenAnswer((_) => Future.value(Cocktail()));
+          .thenAnswer((_) => Future.value(Cocktails(cocktails: [Cocktail()])));
     });
 
     test('can be instantiated', () {
@@ -40,8 +40,7 @@ void main() {
 
     test('fetches new cocktail to pair with existing meal', () async {
       final currentMeal = Meal();
-      final pairing =
-          await recipesRepository.getPairing(currentMeal: currentMeal);
+      final pairing = await recipesRepository.getPairing(meal: currentMeal);
       expect(pairing.meal, equals(currentMeal));
       expect(pairing.cocktail, equals(Cocktail()));
     });
@@ -49,7 +48,7 @@ void main() {
     test('fetches new meal to pair with existing cocktail', () async {
       final currentCocktail = Cocktail();
       final pairing =
-          await recipesRepository.getPairing(currentCocktail: currentCocktail);
+          await recipesRepository.getPairing(cocktail: currentCocktail);
       expect(pairing.meal, equals(Meal()));
       expect(pairing.cocktail, equals(currentCocktail));
     });
