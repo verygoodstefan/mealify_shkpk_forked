@@ -1,5 +1,4 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
-import 'package:equatable/equatable.dart';
 import 'package:recipes_repository/src/models/pairing.dart';
 import 'package:the_cocktail_db_api_client/the_cocktail_db_api_client.dart';
 import 'package:the_meal_db_api_client/the_meal_db_api_client.dart';
