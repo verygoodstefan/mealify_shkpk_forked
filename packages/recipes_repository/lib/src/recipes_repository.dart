@@ -29,7 +29,7 @@ class RecipesRepository {
     try {
       meal ??= await mealDbApiClient.getRandomMeal();
       drink ??= await cocktailDbApiClient.getRandomDrink();
-      return Pairing(meal: meal, cocktail: drink);
+      return Pairing(meal: meal, drink: drink);
     } catch (_) {
       rethrow;
     }

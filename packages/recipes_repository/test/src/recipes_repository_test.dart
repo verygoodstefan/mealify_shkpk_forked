@@ -36,7 +36,7 @@ void main() {
     test('fetches pairing with new meal and cocktail', () async {
       final pairing = await recipesRepository.getRandomPairing();
       expect(pairing.meal, equals(_mockMealFromApiClient));
-      expect(pairing.cocktail, equals(_mockDrinkFromApiClient));
+      expect(pairing.drink, equals(_mockDrinkFromApiClient));
     });
 
     test('fetches new cocktail to pair with existing meal', () async {
@@ -44,7 +44,7 @@ void main() {
         meal: _mockMealFromRepository,
       );
       expect(pairing.meal, equals(_mockMealFromRepository));
-      expect(pairing.cocktail, equals(_mockDrinkFromApiClient));
+      expect(pairing.drink, equals(_mockDrinkFromApiClient));
     });
 
     test('fetches new meal to pair with existing cocktail', () async {
@@ -52,7 +52,7 @@ void main() {
         drink: _mockDrinkFromRepository,
       );
       expect(pairing.meal, equals(_mockMealFromApiClient));
-      expect(pairing.cocktail, equals(_mockDrinkFromRepository));
+      expect(pairing.drink, equals(_mockDrinkFromRepository));
     });
 
     test('throws exception when fetching meal fails', () async {
