@@ -1,8 +1,9 @@
+// ignore_for_file: public_member_api_docs
+
 import 'dart:convert';
 
 import 'package:http/http.dart' as http;
-
-import 'src/models/drink.dart';
+import 'package:the_meal_db_api_client/src/models/drink.dart';
 
 class TheCocktailDbApiClient {
   TheCocktailDbApiClient();
