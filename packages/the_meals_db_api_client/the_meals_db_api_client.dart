@@ -2,7 +2,7 @@ import 'dart:convert';
 
 import 'package:http/http.dart' as http;
 
-import 'libs/src/models/meal.dart';
+import 'lib/src/models/meal.dart';
 
 class TheMealDbApiClient {
   TheMealDbApiClient();
