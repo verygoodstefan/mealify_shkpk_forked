@@ -1,12 +1,13 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:equatable/equatable.dart';
 import 'package:recipes_repository/src/models/pairing.dart';
+import 'package:the_meal_db_api_client/the_meal_db_api_client.dart';
 
 /// {@template recipes_repository}
 /// A Very Good Project created by Very Good CLI.
 /// {@endtemplate}
 class RecipesRepository {
-  final TheMealsDbApiClient mealDbApiClient;
+  final TheMealDbApiClient mealDbApiClient;
   final TheCocktailDbApiClient cocktailDbApiClient;
 
   /// {@macro recipes_repository}
@@ -35,21 +36,10 @@ class RecipesRepository {
   }
 }
 
-class TheMealsDbApiClient {
-  Future<Meal> getRandomMeal() async {
-    return Meal();
-  }
-}
-
 class TheCocktailDbApiClient {
   Future<Cocktail> getRandomCocktail() async {
     return Cocktail();
   }
-}
-
-class Meal extends Equatable {
-  @override
-  List<Object?> get props => [];
 }
 
 class Cocktail extends Equatable {
