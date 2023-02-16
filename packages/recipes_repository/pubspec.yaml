@@ -12,5 +12,8 @@ dev_dependencies:
   very_good_analysis: ^4.0.0
 dependencies:
   equatable: ^2.0.5
+  the_cocktail_db_api_client:
+    path: ../the_cocktail_db_api_client
   the_meal_db_api_client:
     path: ../the_meal_db_api_client
+

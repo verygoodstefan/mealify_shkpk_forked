@@ -1,6 +1,7 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:equatable/equatable.dart';
 import 'package:recipes_repository/src/models/pairing.dart';
+import 'package:the_cocktail_db_api_client/the_cocktail_db_api_client.dart';
 import 'package:the_meal_db_api_client/the_meal_db_api_client.dart';
 
 /// {@template recipes_repository}
@@ -16,33 +17,22 @@ class RecipesRepository {
     this.cocktailDbApiClient,
   );
 
-  /// Fetches a random meal/cocktail [Pairing] of a [Meal] and [Cocktail].
-  /// If a [Meal] is passed, that meal is paired with a [Cocktail] from the API.
-  /// If a [Cocktail] is passed, that cocktail is paired with a [Meal]
+  /// Fetches a random meal/cocktail [Pairing] of a [Meal] and [Drink].
+  /// If a [Meal] is passed, that meal is paired with a [Drink] from the API.
+  /// If a [Drink] is passed, that cocktail is paired with a [Meal]
   /// from the API.
-  /// If both [Meal] and [Cocktail] are passed, then they are paired together
+  /// If both [Meal] and [Drink] are passed, then they are paired together
   /// and no call to the API is made.
   Future<Pairing> getRandomPairing({
     Meal? meal,
-    Cocktail? cocktail,
+    Drink? drink,
   }) async {
     try {
       meal ??= await mealDbApiClient.getRandomMeal();
-      cocktail ??= await cocktailDbApiClient.getRandomCocktail();
-      return Pairing(meal: meal, cocktail: cocktail);
+      drink ??= await cocktailDbApiClient.getRandomDrink();
+      return Pairing(meal: meal, cocktail: drink);
     } catch (_) {
       rethrow;
     }
   }
-}
-
-class TheCocktailDbApiClient {
-  Future<Cocktail> getRandomCocktail() async {
-    return Cocktail();
-  }
-}
-
-class Cocktail extends Equatable {
-  @override
-  List<Object?> get props => [];
 }

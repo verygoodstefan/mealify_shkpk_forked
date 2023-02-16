@@ -3,6 +3,7 @@
 import 'package:mocktail/mocktail.dart';
 import 'package:recipes_repository/recipes_repository.dart';
 import 'package:test/test.dart';
+import 'package:the_cocktail_db_api_client/the_cocktail_db_api_client.dart';
 import 'package:the_meal_db_api_client/the_meal_db_api_client.dart';
 
 class MockMealDbApiClient extends Mock implements TheMealDbApiClient {}
@@ -21,8 +22,8 @@ void main() {
           RecipesRepository(mealDbApiClient, cocktailDbApiClient);
       when(() => mealDbApiClient.getRandomMeal())
           .thenAnswer((_) => Future.value(_mockMealFromApiClient));
-      when(() => cocktailDbApiClient.getRandomCocktail())
-          .thenAnswer((_) => Future.value(Cocktail()));
+      when(() => cocktailDbApiClient.getRandomDrink())
+          .thenAnswer((_) => Future.value(_mockDrinkFromApiClient));
     });
 
     test('can be instantiated', () {
@@ -35,7 +36,7 @@ void main() {
     test('fetches pairing with new meal and cocktail', () async {
       final pairing = await recipesRepository.getRandomPairing();
       expect(pairing.meal, equals(_mockMealFromApiClient));
-      expect(pairing.cocktail, equals(Cocktail()));
+      expect(pairing.cocktail, equals(_mockDrinkFromApiClient));
     });
 
     test('fetches new cocktail to pair with existing meal', () async {
@@ -43,15 +44,15 @@ void main() {
         meal: _mockMealFromRepository,
       );
       expect(pairing.meal, equals(_mockMealFromRepository));
-      expect(pairing.cocktail, equals(Cocktail()));
+      expect(pairing.cocktail, equals(_mockDrinkFromApiClient));
     });
 
     test('fetches new meal to pair with existing cocktail', () async {
-      final currentCocktail = Cocktail();
-      final pairing =
-          await recipesRepository.getRandomPairing(cocktail: currentCocktail);
+      final pairing = await recipesRepository.getRandomPairing(
+        drink: _mockDrinkFromRepository,
+      );
       expect(pairing.meal, equals(_mockMealFromApiClient));
-      expect(pairing.cocktail, equals(currentCocktail));
+      expect(pairing.cocktail, equals(_mockDrinkFromRepository));
     });
 
     test('throws exception when fetching meal fails', () async {
@@ -60,8 +61,7 @@ void main() {
     });
 
     test('throws exception when fetching cocktail fails', () async {
-      when(() => cocktailDbApiClient.getRandomCocktail())
-          .thenThrow(Exception());
+      when(() => cocktailDbApiClient.getRandomDrink()).thenThrow(Exception());
       expect(recipesRepository.getRandomPairing(), throwsException);
     });
   });
@@ -173,6 +173,102 @@ final _mockMealFromRepository = Meal(
   strMeasure20: 'strMeasure20',
   strSource: 'strSource',
   strImageSource: 'strImageSource',
+  strCreativeCommonsConfirmed: 'strCreativeCommonsConfirmed',
+  dateModified: DateTime.now(),
+);
+
+final _mockDrinkFromApiClient = Drink(
+  idDrink: 'idDrink1',
+  strDrink: 'strDrink',
+  strDrinkAlternate: 'strDrinkAlternate',
+  strTags: 'strTags',
+  strVideo: 'strVideo',
+  strCategory: 'strCategory',
+  strIBA: 'strIBA',
+  strAlcoholic: 'strAlcoholic',
+  strGlass: 'strGlass',
+  strInstructions: 'strInstructions',
+  strDrinkThumb: 'strDrinkThumb',
+  strIngredient1: 'strIngredient1',
+  strIngredient2: 'strIngredient2',
+  strIngredient3: 'strIngredient3',
+  strIngredient4: 'strIngredient4',
+  strIngredient5: 'strIngredient5',
+  strIngredient6: 'strIngredient6',
+  strIngredient7: 'strIngredient7',
+  strIngredient8: 'strIngredient8',
+  strIngredient9: 'strIngredient9',
+  strIngredient10: 'strIngredient10',
+  strIngredient11: 'strIngredient11',
+  strIngredient12: 'strIngredient12',
+  strIngredient13: 'strIngredient13',
+  strIngredient14: 'strIngredient14',
+  strIngredient15: 'strIngredient15',
+  strMeasure1: 'strMeasure1',
+  strMeasure2: 'strMeasure2',
+  strMeasure3: 'strMeasure3',
+  strMeasure4: 'strMeasure4',
+  strMeasure5: 'strMeasure5',
+  strMeasure6: 'strMeasure6',
+  strMeasure7: 'strMeasure7',
+  strMeasure8: 'strMeasure8',
+  strMeasure9: 'strMeasure9',
+  strMeasure10: 'strMeasure10',
+  strMeasure11: 'strMeasure11',
+  strMeasure12: 'strMeasure12',
+  strMeasure13: 'strMeasure13',
+  strMeasure14: 'strMeasure14',
+  strMeasure15: 'strMeasure15',
+  strImageSource: 'strImageSource',
+  strImageAttribution: 'strImageAttribution',
+  strCreativeCommonsConfirmed: 'strCreativeCommonsConfirmed',
+  dateModified: DateTime.now(),
+);
+
+final _mockDrinkFromRepository = Drink(
+  idDrink: 'idDrink2',
+  strDrink: 'strDrink',
+  strDrinkAlternate: 'strDrinkAlternate',
+  strTags: 'strTags',
+  strVideo: 'strVideo',
+  strCategory: 'strCategory',
+  strIBA: 'strIBA',
+  strAlcoholic: 'strAlcoholic',
+  strGlass: 'strGlass',
+  strInstructions: 'strInstructions',
+  strDrinkThumb: 'strDrinkThumb',
+  strIngredient1: 'strIngredient1',
+  strIngredient2: 'strIngredient2',
+  strIngredient3: 'strIngredient3',
+  strIngredient4: 'strIngredient4',
+  strIngredient5: 'strIngredient5',
+  strIngredient6: 'strIngredient6',
+  strIngredient7: 'strIngredient7',
+  strIngredient8: 'strIngredient8',
+  strIngredient9: 'strIngredient9',
+  strIngredient10: 'strIngredient10',
+  strIngredient11: 'strIngredient11',
+  strIngredient12: 'strIngredient12',
+  strIngredient13: 'strIngredient13',
+  strIngredient14: 'strIngredient14',
+  strIngredient15: 'strIngredient15',
+  strMeasure1: 'strMeasure1',
+  strMeasure2: 'strMeasure2',
+  strMeasure3: 'strMeasure3',
+  strMeasure4: 'strMeasure4',
+  strMeasure5: 'strMeasure5',
+  strMeasure6: 'strMeasure6',
+  strMeasure7: 'strMeasure7',
+  strMeasure8: 'strMeasure8',
+  strMeasure9: 'strMeasure9',
+  strMeasure10: 'strMeasure10',
+  strMeasure11: 'strMeasure11',
+  strMeasure12: 'strMeasure12',
+  strMeasure13: 'strMeasure13',
+  strMeasure14: 'strMeasure14',
+  strMeasure15: 'strMeasure15',
+  strImageSource: 'strImageSource',
+  strImageAttribution: 'strImageAttribution',
   strCreativeCommonsConfirmed: 'strCreativeCommonsConfirmed',
   dateModified: DateTime.now(),
 );
