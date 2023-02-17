@@ -33,6 +33,17 @@ void main() {
       );
     });
 
+    test('pairing supports value equality', () {
+      final instanceA =
+          Pairing(meal: _mockMealFromApiClient, drink: _mockDrinkFromApiClient);
+      final instanceB =
+          Pairing(meal: _mockMealFromApiClient, drink: _mockDrinkFromApiClient);
+      expect(
+        instanceA,
+        equals(instanceB),
+      );
+    });
+
     test('fetches pairing with new meal and cocktail', () async {
       final pairing = await recipesRepository.getRandomPairing();
       expect(pairing.meal, equals(_mockMealFromApiClient));
