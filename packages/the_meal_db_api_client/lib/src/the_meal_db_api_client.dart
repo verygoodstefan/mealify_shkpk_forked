@@ -15,9 +15,9 @@ class TheMealDbApiClient {
         .get(Uri.parse('https://www.themealdb.com/api/json/v1/1/random.php'));
 
     if (response.statusCode == 200) {
-      final x =
+      final deserializedMeals =
           Meals.fromJson(jsonDecode(response.body) as Map<String, dynamic>);
-      return x.meals.first;
+      return deserializedMeals.meals.first;
     }
     throw Exception('Request failed');
   }
