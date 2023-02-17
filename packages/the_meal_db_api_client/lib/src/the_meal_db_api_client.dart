@@ -2,8 +2,8 @@
 import 'dart:convert';
 
 import 'package:http/http.dart' as http;
-import 'package:the_meal_db_api_client/src/models/meals.dart';
 import 'package:the_meal_db_api_client/src/models/meal.dart';
+import 'package:the_meal_db_api_client/src/models/meals.dart';
 
 class TheMealDbApiClient {
   TheMealDbApiClient(this.client);

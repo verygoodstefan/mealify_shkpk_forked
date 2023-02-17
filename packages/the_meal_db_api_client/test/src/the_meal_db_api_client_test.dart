@@ -2,7 +2,6 @@ import 'package:flutter_test/flutter_test.dart';
 import 'package:http/http.dart' as http;
 import 'package:mockito/annotations.dart';
 import 'package:mockito/mockito.dart';
-import 'package:the_meal_db_api_client/src/models/meals.dart';
 import 'package:the_meal_db_api_client/the_meal_db_api_client.dart';
 
 import 'the_meal_db_api_client_test.mocks.dart';
