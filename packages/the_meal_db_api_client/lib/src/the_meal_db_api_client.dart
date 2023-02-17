@@ -3,16 +3,21 @@ import 'dart:convert';
 
 import 'package:http/http.dart' as http;
 import 'package:the_meal_db_api_client/src/models/meal.dart';
+import 'package:the_meal_db_api_client/src/models/meals.dart';
 
 class TheMealDbApiClient {
-  TheMealDbApiClient();
+  TheMealDbApiClient(this.client);
+
+  http.Client client;
 
   Future<Meal> getRandomMeal() async {
-    final response =
-        await http.get(Uri.parse('www.themealdb.com/api/json/v1/1/random.php'));
+    final response = await client
+        .get(Uri.parse('https://www.themealdb.com/api/json/v1/1/random.php'));
 
     if (response.statusCode == 200) {
-      return Meal.fromJson(jsonDecode(response.body) as Map<String, dynamic>);
+      final deserializedMeals =
+          Meals.fromJson(jsonDecode(response.body) as Map<String, dynamic>);
+      return deserializedMeals.meals.first;
     }
     throw Exception('Request failed');
   }
