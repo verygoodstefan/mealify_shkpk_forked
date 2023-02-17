@@ -6,9 +6,11 @@ import 'package:the_meal_db_api_client/src/models/meals.dart';
 import 'package:the_meal_db_api_client/src/models/meal.dart';
 
 class TheMealDbApiClient {
-  TheMealDbApiClient();
+  TheMealDbApiClient(this.client);
 
-  Future<Meal> getRandomMeal(http.Client client) async {
+  http.Client client;
+
+  Future<Meal> getRandomMeal() async {
     final response = await client
         .get(Uri.parse('http://www.themealdb.com/api/json/v1/1/random.php'));
 

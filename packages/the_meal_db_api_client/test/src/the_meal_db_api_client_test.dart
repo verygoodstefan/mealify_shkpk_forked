@@ -19,7 +19,7 @@ void main() {
         ),
       ).thenAnswer((_) async => http.Response(rawJsonResponse, 200));
 
-      expect(await TheMealDbApiClient().getRandomMeal(client), isA<Meal>());
+      expect(await TheMealDbApiClient(client).getRandomMeal(), isA<Meal>());
     });
 
     test('throws an exception if the http call completes with an error', () {
@@ -30,7 +30,7 @@ void main() {
         ),
       ).thenAnswer((_) async => http.Response('Not Found', 404));
 
-      expect(TheMealDbApiClient().getRandomMeal(client), throwsException);
+      expect(TheMealDbApiClient(client).getRandomMeal(), throwsException);
     });
   });
 }
