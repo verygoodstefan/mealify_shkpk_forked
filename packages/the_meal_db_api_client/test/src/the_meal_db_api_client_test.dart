@@ -14,7 +14,7 @@ void main() {
       final client = MockClient();
       when(
         client.get(
-          Uri.parse('http://www.themealdb.com/api/json/v1/1/random.php'),
+          Uri.parse('https://www.themealdb.com/api/json/v1/1/random.php'),
         ),
       ).thenAnswer((_) async => http.Response(rawJsonResponse, 200));
 
@@ -25,7 +25,7 @@ void main() {
       final client = MockClient();
       when(
         client.get(
-          Uri.parse('http://www.themealdb.com/api/json/v1/1/random.php'),
+          Uri.parse('https://www.themealdb.com/api/json/v1/1/random.php'),
         ),
       ).thenAnswer((_) async => http.Response('Not Found', 404));
 

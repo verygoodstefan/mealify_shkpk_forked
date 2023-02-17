@@ -12,7 +12,7 @@ class TheMealDbApiClient {
 
   Future<Meal> getRandomMeal() async {
     final response = await client
-        .get(Uri.parse('http://www.themealdb.com/api/json/v1/1/random.php'));
+        .get(Uri.parse('https://www.themealdb.com/api/json/v1/1/random.php'));
 
     if (response.statusCode == 200) {
       final x =
