@@ -60,7 +60,7 @@ class Meal extends Equatable {
     required this.dateModified,
   });
 
-  factory Meal.fromJson(List<dynamic> json) => _$MealFromJson(json);
+  factory Meal.fromJson(Map<String, dynamic> json) => _$MealFromJson(json);
 
   final String idMeal;
   final String strMeal;

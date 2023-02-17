@@ -6,7 +6,7 @@ part of 'meal.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-Meal _$MealFromJson(List<dynamic> json) => Meal(
+Meal _$MealFromJson(Map<String, dynamic> json) => Meal(
       idMeal: json['idMeal'] as String,
       strMeal: json['strMeal'] as String,
       strDrinkAlternate: json['strDrinkAlternate'] as String?,
