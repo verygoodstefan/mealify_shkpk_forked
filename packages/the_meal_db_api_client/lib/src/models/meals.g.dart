@@ -8,7 +8,7 @@ part of 'meals.dart';
 
 Meals _$MealsFromJson(Map<String, dynamic> json) => Meals(
       (json['meals'] as List<dynamic>)
-          .map((e) => Meal.fromJson(e as Map<String, dynamic>))
+          .map((e) => Meal.fromJson(e as List<dynamic>))
           .toList(),
     );
 
