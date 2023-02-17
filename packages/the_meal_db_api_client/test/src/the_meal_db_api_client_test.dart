@@ -19,7 +19,7 @@ void main() {
         ),
       ).thenAnswer((_) async => http.Response(rawJsonResponse, 200));
 
-      expect(await TheMealDbApiClient().getRandomMeal(client), isA<Meals>());
+      expect(await TheMealDbApiClient().getRandomMeal(client), isA<Meal>());
     });
 
     test('throws an exception if the http call completes with an error', () {
